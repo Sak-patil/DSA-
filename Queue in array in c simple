@@ -1,0 +1,71 @@
+#include<stdio.h>
+int front=-1;
+int rear=-1;
+int value;
+int queue[100];
+void insert(){
+    int value;
+    if(rear==99){
+        printf("queue is full\n");
+    }
+    else{
+        if(front==-1){
+            front=0;
+        }
+        rear=rear+1;
+        printf("Enter the value u want to insert:\n");
+        scanf("%d",&value);
+        queue[rear]=value;
+    }
+}
+void delete(){
+    if(front==-1||front>rear){
+        printf("queue is underflow\n");
+    }
+    else{
+        int deleted=queue[front];
+        front=front+1;
+        printf("deleted value is:%d \n",deleted);
+    }
+}
+void display(){
+    if(front==-1||front>rear){
+        front=rear=-1;
+        printf("queue is underflow\n");
+    }
+    else{
+        printf("Elements present in queue are:\n");
+        for(int i=front;i<=rear;i++){
+            printf("%d",queue[i]);
+            printf("\n");
+        }
+    }
+}
+int main(){
+    int choice;
+do{
+printf("Choose the option:");
+scanf("%d",&choice);
+switch (choice){
+case 1:
+    insert();
+    break;
+case 2:
+    delete();
+    break;
+case 3:
+    display();
+    break;
+case 4:
+    printf("Exit()");
+    break;
+default:
+    printf("Enter valid option");
+    break;
+}
+}
+while(choice!=4);
+}
+
+
+
