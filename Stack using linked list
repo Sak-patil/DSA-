@@ -1,0 +1,83 @@
+#include<stdio.h>
+#include<string.h>
+int stack[100],input,n=100,choice,top=-1;
+void push(){
+if(top==n-1){
+printf("stack is overflow");
+printf("\n");
+}
+else{
+top=top+1;
+printf("Enter the value you want to push:");
+scanf("%d",&input);
+printf("\n");
+stack[top]=input;
+}
+}
+void pop()
+{
+if(top==-1){
+printf("Stack is underflow\n");
+printf("\n");
+}
+else{
+printf("Popped value is:%d\n",stack[top]);
+printf("\n");
+top=top-1;
+}
+}
+void peek()
+{
+if(top==-1){
+printf("Stack is empty\n");
+printf("\n");
+}
+else{
+printf("Elements present in stack are:\n");
+for(int i=top;i>=0;i--){
+printf("%d",stack[i]);
+printf("\n");
+}
+printf("\n");
+}
+}
+int main()
+{
+printf("1)Enter 1 to push\n"
+"2)Enter 2 to pop\n"
+"3)Enter 3 to peek\n"
+"4)Enter 4 to exit\n");
+do{
+printf("Entre your choice:");
+scanf("%d",&choice);
+switch (choice){
+case 1:{
+push();
+break;
+}
+case 2:{
+pop();
+break;
+}
+case 3:{
+peek();
+break;
+}
+case 4:{
+printf("Exit\n");
+break;
+}
+default:{
+printf("Please entre valid number\n");
+printf(“\n”);
+break;
+}
+}
+}
+while(choice!=4);
+return 0;
+}
+Output:
+PS C:\Users\pshub\Downloads\DSA practice> gcc main.c
+PS C:\Users\pshub\Downloads\DSA practice> ./a.exe
+1)Enter 1 to push
