@@ -1,0 +1,115 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+    int data;
+    struct node *prev;
+    struct node *next;
+};
+struct node *createnode(int value) {
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->data = value;
+    return newNode;
+}
+struct node *insertionatbeginning(struct node *head,int value){
+    struct node *newnode=createnode(value);
+    if (head==NULL){
+        newnode->prev=NULL;
+        newnode->next=NULL;
+        return head;
+    }
+    else{
+        newnode->prev=NULL;
+        newnode->next=head;
+        head=newnode;
+        return head;
+    }
+}
+struct node *insertinmiddle(struct node *head,int loc,int value){
+    int i=1;
+    struct node *temp;
+    struct node *newnode=createnode(value);
+    temp=head;
+    while(i<loc-1){
+        temp=temp->next;
+        i++;
+    }
+    newnode->next=temp->next;
+    newnode->prev=temp;
+    newnode->next->prev=newnode;
+    temp->next=newnode;
+    return head;
+}
+struct node *insertionatend(struct node *head,int value){
+    struct node *newnode=createnode(value);
+    struct node *temp;
+    temp=head;
+    if(head==NULL){
+        head=newnode;
+    }
+    else{
+        while(temp!=NULL){
+            temp=temp->next;
+        }
+        newnode->next=NULL;
+        newnode->prev=temp;
+        temp->next=newnode;
+    }
+}
+struct node*deketeatbeginnig(struct node *head){
+    struct node *dnode=head;
+    if(head==NULL){
+        printf("lsit is null");
+    }
+    else{
+    head=head->next;
+    head->prev=NULL;
+    free(dnode);
+    }
+    return head;
+}
+struct node*deleteinmiddle(struct node *head,int loc){
+    struct node *dnode=head;
+    if(head==NULL){
+        printf("lsit is null");
+    }
+    else{
+    while(dnode->data !=loc){
+        dnode=dnode->next;
+    }
+    dnode->prev->next=dnode->next;
+    dnode->next->prev=dnode->prev;
+    free(dnode);
+    return head;
+}
+}
+struct node*deketeinend(struct node *head){
+    struct node *dnode=head;
+    if(head==NULL){
+        printf("lsit is null");
+    }
+    else{
+        while(dnode->next!=NULL){
+            dnode=dnode->next;
+        }
+        dnode->prev->next=NULL;
+        free(dnode);
+    }
+}
+void display(struct node *head){
+    struct node *temp;
+    temp=head;
+    if(temp==NULL){
+        printf("List is empty");
+    }
+    else{
+    while(temp!=NULL){
+        printf("%d",temp->data);
+        temp=temp->next;
+    }
+}
+}
+int main(){
+    struct node*head=NULL;
+
+}
