@@ -1,0 +1,79 @@
+#include<stdio.h>
+#include<stdlib.h>
+int max=100,rear=-1,front=-1;
+int queue[100];
+int insertion(int value){
+    if((rear+1)%max==front){//front==(rear+1)%max in this Right now you check full condition after empty condition, which causes wrong behavior.
+        printf("queue is full");
+    }
+    else if(front==-1&&rear==-1){
+        rear=front=0;
+        queue[rear]=value;
+        return value;
+    }
+    else{
+        rear=(rear+1)%max;
+        queue[rear]=value;
+        return value;
+}
+}
+void deletion(){
+    if(front==-1){
+        printf("queue is empty");
+    }
+    else if (front==rear){
+        front=rear=-1;
+        printf("Element is deleted\n")
+;    }
+    else{
+    front=(front+1)%max;
+     printf("Element is deleted\n");
+    }
+    }
+void display() {
+    if (front == -1) {
+        printf("Queue is empty\n");
+        return;
+    }
+    int temp = front;
+    while (temp != rear) {   
+        printf("%d \n", queue[temp]);
+        temp = (temp + 1) % max;
+    }
+    printf("%d\n", queue[rear]);
+}
+int main(){
+while(1){
+     printf("Choose the option:\n");
+    printf("1 for insertion\n");
+    printf("2 for deletion \n");
+    printf("3 for display\n");
+    printf("4 for exit\n");
+        int choice;
+        scanf("%d",&choice);
+
+switch(choice){
+case 1:{
+    int value;
+    printf("Entre value to add:");
+    scanf("%d",&value);
+    insertion(value);
+    break;
+}
+case 2:{
+    deletion();
+    break;
+}
+case 3:{
+    display();
+    break;
+}
+case 4:{
+    exit(0);
+    break;
+}
+}
+}
+}
+
+
