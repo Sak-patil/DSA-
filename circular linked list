@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int value;
+    struct node *next;
+};
+struct node *tail=NULL;
+
+struct node* insertatbeginning(struct node *head,int value){
+    struct node *newnode=(struct node *) malloc (sizeof (struct node));
+    newnode->value=value;
+    if(head==NULL){
+        head=tail=newnode;
+        tail->next=head;
+        return head;
+    }
+    else {
+        newnode->next=head;
+        head=newnode;
+        tail->next=head;
+        return head;
+    }
+}
+
+struct node* insertatend(struct node *head,int value1){
+    struct node *newnode=(struct node *) malloc (sizeof (struct node));
+    newnode->value=value1;
+     newnode->next = NULL;
+    if(head==NULL){
+        head=tail=newnode;
+        tail->next=head;
+        return head;
+    }
+    else{
+        tail->next=newnode;
+        tail=newnode;
+        tail->next=head;
+    }
+    return head;
+}
+
+struct node* deletefront(struct node *head){
+    if(head==NULL){
+        printf("list is empty");
+    }
+    else if(head==tail){
+        free (head);
+        head=tail=NULL;
+    }
+    else{
+        tail->next=head->next;
+        struct node *temp;
+        temp=head;
+        head=head->next;
+        free(temp);
+    }
+    return head;
+}
+
+struct node* deleteend(struct node *head){
+    if(head==NULL){
+        printf("list is empty");
+    }
+    else if(head==tail){
+        free (head);
+        head=tail=NULL;
+    }
+    else{
+        struct node *temp;
+        struct node *prev;
+        temp=head;
+        while(temp->next!=head){
+            prev=temp;
+            temp=temp->next;
+        }
+        prev->next=head;
+        tail=prev;
+        free(temp);
+    }
+    return head;
+}
+
+
+
+void display(struct node *head){
+struct node *temp;
+temp=head;
+ do {
+        printf("%d \n", temp->value);
+        temp = temp->next;
+    } while (temp != head);
+}
+
+int main(){
+    struct node *head=NULL;
+    head=insertatbeginning(head,4);
+    head=insertatend(head,4);
+    head=insertatbeginning(head,56);
+    head=insertatbeginning(head,7);
+    display(head);
+    head=deleteend(head);
+    head=deletefront(head);
+    display(head);
+}
