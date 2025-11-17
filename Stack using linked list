@@ -1,0 +1,127 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node {
+int data;
+struct node* next ;
+} *top;
+void push(int value){
+struct node* newnode = (struct node*)malloc(sizeof(struct
+node));
+if (!newnode){
+printf("Stack is overflow\n");
+}
+else{
+newnode->data = value;
+newnode->next = top;
+top=newnode;
+}
+}
+void pop(){
+if(top==NULL){
+printf("Stack is underflow\n");
+}
+else{
+struct node* ptr=top;
+top=top->next;
+int popped_value=ptr->data;
+free(ptr);
+printf("popped value is:%d \n",popped_value);
+}
+}
+void display(){
+if(top==NULL){
+printf("Stack is underflow\n");
+}
+else{
+struct node* ptr=top;
+while(ptr!=NULL){
+printf("%d \n",ptr->data);
+ptr=ptr->next;
+}
+}
+}
+int main(){
+int choice;
+do{
+printf("Enter your choise:\n"
+"1 for push;\n"
+"2 for pop;\n"
+"3 for display\n"
+"4 to exit\n");
+scanf("%d",&choice);
+switch(choice){
+case 1:{
+int input;
+printf("Enter the value you want to push:\n");
+scanf("%d",&input);
+push(input);
+break;
+}
+case 2:{
+pop();
+break;
+}
+case 3:{
+printf("Elements present in stack are:\n");
+display();
+break;
+}
+case 4:{
+printf("Exit\n");
+break;
+}
+default:{
+printf("Please enter valid number\n");
+break;
+}
+}
+}
+while(choice!=4);
+}
+Output:
+Enter your choise:
+1 for push
+2 for pop
+3 for display
+4 to exit
+1
+Enter the value you want to push:
+6
+Enter your choise:
+1 for push
+2 for pop
+3 for display
+4 to exit
+1
+Enter the value you want to push:
+45
+Enter your choise:
+1 for push
+2 for pop
+3 for display
+4 to exit
+3
+Elements present in stack are:
+45
+6
+Enter your choise:
+1 for push
+2 for pop
+3 for display
+4 to exit
+2
+popped value is:45
+Enter your choise:
+1 for push
+2 for pop
+3 for display
+4 to exit
+67
+Please enter valid number
+Enter your choise:
+1 for push
+2 for pop
+3 for display
+4 to exit
+4
+Exit
