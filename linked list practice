@@ -1,0 +1,170 @@
+import java.util.Scanner;
+
+class Node{
+    int data;
+    Node next;
+    Node(int data){
+        this.data=data;
+        this.next=null;
+    }
+}
+public class main{
+    static boolean search(Node head,int target){
+        Node temp=head;
+        while(temp!=null){
+            if(temp.data==target){
+                return true;
+            }
+            temp=temp.next;
+        }
+        return false;
+    }
+
+    static Node insertAtBeginning(Node head,int element){
+        Node new_node=new Node(element);
+        new_node.next=head;
+        head=new_node;
+        return head;
+    }
+
+    static Node deletefrombeginning(Node head){
+        head=head.next;
+        return head;
+    }
+
+    static Node insertarend(Node head,int element){
+        Node temp=head;
+        while(temp.next!=null){
+            temp=temp.next;
+        }
+        Node end=new Node(element);
+        temp.next=end;
+        end.next=null;
+        return head;
+    }
+
+    static Node deleteatend(Node head){
+        Node temp=head;
+        while(temp.next.next!=null){
+            temp=temp.next;
+        }
+        temp.next=null;
+        return head;
+    }
+
+    static Node insertatposition(Node head,int position,int data){
+        Node temp=head;
+        int k=1;
+        while(k!=position-1){
+            temp=temp.next;
+            k++;
+        }
+        Node newnode=new Node(data);
+        newnode.next=temp.next;
+        temp.next=newnode;
+        return head; 
+    }
+
+    static Node deletefromposition(Node head,int position){
+        Node temp=head;
+        int k=1;
+        while(k!=position-1){
+            temp=temp.next;
+            k++;
+        }
+        temp.next=temp.next.next;
+        return head;
+    }
+
+    static Node reverselink(Node head){
+        if(head==null || head.next==null){
+            return head;
+        }
+        else{
+            Node current=head;
+            Node prev=null;
+            Node next;
+            
+            while(current!=null){
+                next=current.next;
+                current.next=prev;
+                prev=current;
+                current=next;            
+            }
+            return prev;
+        }
+    }
+
+    static Node middle(Node head){
+        Node slow=head;
+        Node fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        Node middle=slow;
+        return middle;
+    }
+
+    static boolean cycle(Node head){
+        Node slow=head;
+        Node fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow == fast) {
+                return true;
+            }
+        }
+            return false;
+    }
+
+    public static void main(String[] args){
+        Node n1 =new Node(1);
+        Node n2 =new Node(2);
+        Node n3 =new Node(3);
+        n1.next=n2;
+        n2.next=n3;
+        n3.next=n1;
+        Node head=n1;
+
+        Scanner sc=new Scanner(System.in);
+        //searching
+        // int target_given=sc.nextInt();
+        // boolean result=search(head,target_given);
+        // if(result==true){
+        //     System.out.println("element present");
+        // }
+        // else{
+        //     System.out.println("not present");
+        // }
+
+        //adding new node at beginning
+        // int element=sc.nextInt();
+        // head=insertAtBeginning(head, element);
+        // head=deletefrombeginning(head);
+        // System.out.println("end node");
+        //  int element_end=sc.nextInt();
+        //  head=insertarend(head, element_end);
+        // head=deleteatend(head);
+        //  head=insertatposition(head,4,4);
+        // head=deletefromposition(head,3);
+        Node temp=head;
+        // while(temp!=null){
+        //     System.out.println("data"+  temp.data);
+        //     temp=temp.next;
+        // }
+
+        // int middle=middle(head).data;
+        //  System.out.println("middle:"+ middle);
+
+        boolean result=cycle(head);
+        if(result){
+            System.out.println("cycle is present");
+        }
+        else{
+            System.out.println("no");
+        }
+        sc.close();
+    }
+}
