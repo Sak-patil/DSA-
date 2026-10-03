@@ -1,0 +1,26 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class heap {
+//insertion 
+    public static void insertion(ArrayList<Integer> heap_arr,int insert_int){
+        heap_arr.add(insert_int);
+        int i=heap_arr.size()-1;
+        int parent=(i-1)/2;
+        while(i>0 && heap_arr.get(i)>heap_arr.get(parent)){
+            int temp=heap_arr.get(i);
+            heap_arr.set(i,heap_arr.get(parent));
+            heap_arr.set(parent,temp);
+            i=parent;
+            parent=(i-1)/2;
+        }
+    }
+    public static void main(String[] args){
+        ArrayList<Integer> heap_arr=new ArrayList<>();
+        insertion(heap_arr,3);
+        insertion(heap_arr,4);
+        insertion(heap_arr,5);
+        insertion(heap_arr,6);
+        System.out.println(heap_arr);
+    }
+}
