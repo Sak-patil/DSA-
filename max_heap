@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-
 public class heap {
     public static void insertion(ArrayList<Integer> heap_arr,int insert_int){
         heap_arr.add(insert_int);
