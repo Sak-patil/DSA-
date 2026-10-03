@@ -2,7 +2,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class heap {
-//insertion 
     public static void insertion(ArrayList<Integer> heap_arr,int insert_int){
         heap_arr.add(insert_int);
         int i=heap_arr.size()-1;
@@ -15,12 +14,59 @@ public class heap {
             parent=(i-1)/2;
         }
     }
+
+    public static void deletion(ArrayList<Integer> heap_arr,int value_ind){
+        if(value_ind==heap_arr.size()-1){
+            return;
+        }
+
+        heap_arr.set(value_ind,heap_arr.get((heap_arr.size()-1)));
+        heap_arr.remove(heap_arr.size()-1);
+        int i=value_ind;
+        //if replacement is greater than its parent so we have to move up the heapify up 
+        int parent=(i-1)/2;
+        if(i!=0 && heap_arr.get(i)>heap_arr.get(parent)){
+            while(i>0 && heap_arr.get(i)>heap_arr.get(parent)){
+                int temp=heap_arr.get(i);
+                heap_arr.set(i,heap_arr.get(parent));
+                heap_arr.set(parent,temp);
+                i=parent;
+                parent=(i-1)/2;
+            }
+        }
+        
+        else{
+            //condition satisfies :till it has one left child
+            while((2*i)+1 < heap_arr.size()){
+                int left=(2*i)+1;
+                int right=(2*i)+2;
+                int larger_child=left;
+                if(right<heap_arr.size() && heap_arr.get(right)>=heap_arr.get(left)){
+                    larger_child=right;
+                }
+                if(heap_arr.get(i)>=heap_arr.get(larger_child)){
+                    return;
+                }
+
+                //if replacement is small than children then have to heapify down 
+                // to understanding : else if(heap_arr.get(larger_child)>heap_arr.get(i)){
+                else{
+                    int temp_left=heap_arr.get(i);
+                    heap_arr.set(i,heap_arr.get(larger_child));
+                    heap_arr.set(larger_child,temp_left);
+                    i=larger_child;
+                }
+            }
+        }
+    }
     public static void main(String[] args){
         ArrayList<Integer> heap_arr=new ArrayList<>();
         insertion(heap_arr,3);
         insertion(heap_arr,4);
         insertion(heap_arr,5);
         insertion(heap_arr,6);
-        System.out.println(heap_arr);
+        System.out.println("inserted array"+heap_arr);
+        deletion(heap_arr,1);
+        System.out.println("after deletion"+heap_arr);
     }
 }
