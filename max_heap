@@ -83,6 +83,28 @@ public class heap {
             }
         }
     }
+
+    //making the funtion of heapify down for the heap sort which is same as heap down 
+    public static void heapify(int[] array, int i, int length){
+        int current=i;
+        while((2*current)+1<length){
+            int left=(2*current)+1;
+            int right=(2*current)+2;
+            int largest=left;
+            if(array[right]>array[left]){
+                largest=right;
+            }
+            if(array[current]>=array[largest]){
+                break;
+            }
+
+            int temp=array[current];
+            array[current]=array[largest];
+            array[largest]=temp;        
+            current=largest;
+        }
+    }
+    
     public static void main(String[] args){
         // ArrayList<Integer> heap_arr=new ArrayList<>();
         // insertion(heap_arr,3);
