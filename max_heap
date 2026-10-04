@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 public class heap {
     public static void insertion(ArrayList<Integer> heap_arr,int insert_int){
         heap_arr.add(insert_int);
@@ -58,14 +60,42 @@ public class heap {
             }
         }
     }
+
+    public static void building(int[] array){
+        int length=array.length;
+        int last_non_leaf=(length/2)-1;
+        for(int i=last_non_leaf;i>=0;i--){
+            int current=i;
+            while((2*current)+1<length){
+                int left=2*current+1;
+                int right=2*current+2;
+                int largest=left;
+                if(right<length && array[right]>array[left]){
+                    largest=right;
+                }
+                if(array[current]>=array[largest]){
+                    break;
+                }
+                int temp=array[current];
+                array[current]=array[largest];
+                array[largest]=temp;
+                current=largest;
+            }
+        }
+    }
     public static void main(String[] args){
-        ArrayList<Integer> heap_arr=new ArrayList<>();
-        insertion(heap_arr,3);
-        insertion(heap_arr,4);
-        insertion(heap_arr,5);
-        insertion(heap_arr,6);
-        System.out.println("inserted array"+heap_arr);
-        deletion(heap_arr,1);
-        System.out.println("after deletion"+heap_arr);
+        // ArrayList<Integer> heap_arr=new ArrayList<>();
+        // insertion(heap_arr,3);
+        // insertion(heap_arr,4);
+        // insertion(heap_arr,5);
+        // insertion(heap_arr,6);
+        // System.out.println("inserted array"+heap_arr);
+        // //deletion(heap_arr,1);
+        // System.out.println("after deletion"+heap_arr);
+        int[] array={2,5,4,6,7,9,10};
+        System.out.println("inserted array"+ Arrays.toString(array));
+        building(array);
+        System.out.println("after deletion"+ Arrays.toString(array));
+        
     }
 }
