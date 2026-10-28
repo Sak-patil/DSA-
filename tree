@@ -1,0 +1,77 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+public class treeNode {
+    int val;
+    treeNode left;
+    treeNode right;
+    treeNode(int val){
+        this.val=val;
+    }
+
+    public static void inorder(treeNode root){
+        treeNode temp=root;
+        if(temp==null){
+            return;
+        }
+        inorder(root.left);
+        System.out.print(root.val + " ");
+        inorder(root.right);
+    }
+
+    public static List<Integer> inoorder(treeNode root){
+        List<Integer> list=new ArrayList<>();
+        Stack<treeNode> stack=new Stack<>();
+        treeNode temp=root;
+
+        while(temp!=null || !stack.isEmpty()){
+            while(temp!=null){
+                stack.push(temp);
+                temp=temp.left;
+            }
+            temp=stack.pop();
+            list.add(temp.val);
+
+            temp=temp.right;
+        }
+        return list;
+    }
+
+    public static void preorder(treeNode root){
+        treeNode temp=root;
+        if(temp==null){
+            return;
+        }
+        System.out.print(temp.val+ " ");
+        preorder(temp.left);
+        preorder(temp.right);
+    }
+
+    public static void postorder(treeNode root){
+        treeNode temp=root;
+        if(temp==null){
+            return;
+        }
+        postorder(root.left);
+        postorder(root.right);
+        System.out.print(temp.val+ " ");
+
+    }
+
+    public static void main(String args[]){
+        treeNode root=new treeNode(5);
+        root.left=new treeNode(6);
+        root.right=new treeNode(7);
+        root.left.left=new treeNode(9);
+        root.right.right=new treeNode(10);
+        // inorder(root);
+        // List<Integer> result=inoorder(root);
+        // System.out.println(result);
+        //preorder(root);
+        postorder(root);
+    }
+
+
+}
+
