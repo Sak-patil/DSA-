@@ -1,56 +1,40 @@
-#include <stdio.h>
-
-// Function to swap two elements
-void swap(int *a, int *b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-// Partition function
-int partition(int arr[], int low, int high) {
-    int pivot = arr[high]; // pivot element
-    int i = low - 1;       // index of smaller element
-
-    for (int j = low; j <= high - 1; j++) {
-        if (arr[j] < pivot) {
-            i++;
-            swap(&arr[i], &arr[j]);
+import java.util.*;
+class QuickSort {
+    static int partition(int[] arr,int low,int high){
+        int pivot=arr[low];
+        int p=low+1;
+        int q=high;
+        while(p<=q){
+            while(p<=high && arr[p]<pivot ){
+                p++;
+            }
+            while(arr[q]>pivot){
+                q--;
+            }
+            if(p<q){
+                int temp=arr[p];
+                arr[p]=arr[q];
+                arr[q]=temp;
+            }
         }
+
+        int temp=arr[low];
+        arr[low]=arr[q];
+        arr[q]=temp;
+        return q;
+    
     }
-    swap(&arr[i + 1], &arr[high]); // place pivot at correct position
-    return i + 1;                  // return pivot index
-}
+    static void quickSort(int[] arr,int low,int high){
+        if(low<high){
+            int p=partition(arr,low,high);
+            quickSort(arr,low,p-1);
+            quickSort(arr,p+1,high);
+        }
 
-// Quick Sort function
-void quickSort(int arr[], int low, int high) {
-    if (low < high) {
-        int pi = partition(arr, low, high); // partition index
-
-        quickSort(arr, low, pi - 1);  // sort left subarray
-        quickSort(arr, pi + 1, high); // sort right subarray
     }
-}
-
-// Function to print array
-void printArray(int arr[], int size) {
-    for (int i = 0; i < size; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
-}
-
-// Main function
-int main() {
-    int arr[] = {5, 8, 1, 4};
-    int n = sizeof(arr) / sizeof(arr[0]);
-
-    printf("Original Array: ");
-    printArray(arr, n);
-
-    quickSort(arr, 0, n - 1);
-
-    printf("Sorted Array: ");
-    printArray(arr, n);
-
-    return 0;
+    public static void main(String args[]){
+        int[] arr={5,6,2,9,1,0};
+        quickSort(arr,0 ,arr.length-1);
+        System.out.println("Sorted arrays:"+ Arrays.toString(arr));
+    }
 }
