@@ -1,0 +1,55 @@
+import java.util.*;
+public class KnapSack {
+    public static void main(String args[]){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the number of items");
+        int n=sc.nextInt();
+         double[] weight = new double[n];
+        double[] profit = new double[n];
+        double[] ratio = new double[n];
+
+
+        for(int i=0;i<n;i++){
+            System.out.println("Enter the weights and profits of items");
+            weight[i]=sc.nextInt();
+            profit[i]=sc.nextInt();
+            ratio[i]=profit[i]/weight[i];
+        }
+
+        System.out.print("Enter knapsack capacity: ");
+        double capacity = sc.nextDouble();
+
+        //sort descending 
+        for(int i=0;i<n-1;i++){
+            for(int j=i+1;j<n;j++){
+                if(ratio[j]>ratio[i]){
+                    double temp=ratio[j];
+                    ratio[j]=ratio[i];
+                    ratio[i]=temp;
+
+                    temp=weight[j];
+                    weight[j]=weight[i];
+                    weight[i]=temp;
+
+                    temp=profit[j];
+                    profit[j]=profit[i];
+                    profit[i]=temp;
+                }
+            }
+        }
+        double total_profit=0;
+
+        for(int i=0;i<n;i++){
+            if(weight[i]<=capacity){
+                total_profit+=profit[i];
+                capacity -= weight[i];
+            }
+            else{
+                total_profit += ratio[i]*capacity;
+                break;
+            }
+        }
+        System.out.println("Total_profit="+total_profit);
+    }
+    
+}
