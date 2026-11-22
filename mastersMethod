@@ -1,0 +1,45 @@
+import java.util.*;
+
+public class mastersMethod {
+    public static void main(String args[]){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter value of a:");
+        double a=sc.nextDouble();
+
+        System.out.println("Enter value of b:");
+        double b=sc.nextDouble();
+
+        System.out.println("Enter value of k:");
+        double k=sc.nextDouble();
+
+        System.out.println("Enter value of p:");
+        double p=sc.nextDouble();
+
+        double logBA=Math.log(a)/Math.log(b);
+
+        if(logBA>k){
+            System.out.println("Time complexity: Theta"+"(n^"+logBA+")");
+        }
+        else if(logBA==k){
+            if(p>-1){
+                System.out.println("Time complexity: Theta"+"(n^"+k+"log^"+(p+1)+"n)");
+
+            }
+            else if(p==-1){
+                System.out.println("Time complexity: Theta"+"(n^"+k+"log(logn))");
+
+            }
+            else if(p<-1){
+                System.out.println("Time complexity: Theta"+"(n^"+k+")");
+            }
+        }
+        else{
+            if(p>=0){
+                System.out.println("Time complexity: Theta"+"(n^"+k+"log^"+p+"n");
+            }
+            else{
+                System.out.println("Time complexity: Theta"+"(n^"+k+")");
+            }
+        }  
+    }
+}
