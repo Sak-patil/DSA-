@@ -1,0 +1,65 @@
+import java.util.*;
+
+public class jobSequencing {
+    public static void main(String args[]){
+            Scanner sc=new Scanner(System.in);
+            System.out.println("Enter the total numbers:");
+            int n=sc.nextInt();
+            int[] deadline=new int[n];
+            int[] profit=new int[n];
+            int[] job=new int[n];
+
+            for(int i=0;i<n;i++){
+                job[i]=i+1;
+                System.out.println("enter deadline and profit of job:");
+                deadline[i]=sc.nextInt();
+                profit[i]=sc.nextInt();
+            }
+
+            for(int i=0;i<n-1;i++){
+                for(int j=i+1;j<n;j++){
+                    if(profit[j]>profit[i]){
+                        int temp=profit[j];
+                        profit[j]=profit[i];
+                        profit[i]=temp;
+
+                        temp=deadline[j];
+                        deadline[j]=deadline[i];
+                        deadline[i]=temp;
+
+                        temp=job[j];
+                        job[j]=job[i];
+                        job[i]=temp;
+                    }
+                }
+            }
+
+            int maxDeadline=0;
+            for(int i=0;i<n;i++){
+                maxDeadline=Math.max(maxDeadline,deadline[i]);
+            }
+
+            int[] slots=new int[maxDeadline+1];
+            Arrays.fill(slots,-1);
+            int totalprofit=0;
+
+            for(int i=0;i<n;i++){
+                for(int j=deadline[i];j>=1;j--){
+                    if(slots[j]==-1){
+                        slots[j]=job[i];
+                        totalprofit +=profit[i];
+                        break;
+                    }
+                }
+            }
+
+            System.out.println("\nScheduled Jobs:");
+
+            for(int i=1;i<=maxDeadline ;i++ ){
+                if(slots[i]!=-1){
+                    System.out.print("j"+slots[i]+",");
+                }
+            }
+            System.out.println("totalprofit:"+totalprofit);
+    }
+}
